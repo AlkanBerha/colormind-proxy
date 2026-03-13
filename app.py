@@ -34,7 +34,7 @@ def analyze():
         }
 
         payload = {
-            "model": "google/gemini-2.0-flash-exp:free",
+            "model": "google/gemma-3n-e4b-it:free",
             "messages": [
                 {
                     "role": "user",
