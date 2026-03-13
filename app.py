@@ -34,7 +34,7 @@ def analyze():
         }
 
         payload = {
-            "model": "qwen/qwen2.5-vl-72b-instruct:free",
+            "model": "model": "openrouter/free",",
             "messages": [
                 {
                     "role": "user",
