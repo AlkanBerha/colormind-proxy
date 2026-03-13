@@ -7,6 +7,13 @@ app = Flask(__name__)
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 
+MODELS = [
+    "meta-llama/llama-3.2-11b-vision-instruct:free",
+    "google/gemma-3-27b-it:free",
+    "qwen/qwen2.5-vl-72b-instruct:free",
+    "microsoft/phi-4-multimodal-instruct:free",
+]
+
 PROMPT = (
     "Sen ColorMind AI adli bir Renk Duygusu Ogretmeni yapay zekasisin. "
     "Bu gorseldeki baskin renkleri analiz et. "
@@ -33,36 +40,42 @@ def analyze():
             "Content-Type": "application/json"
         }
 
-        payload = {
-          "model": "google/gemma-3-27b-it:free",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": PROMPT},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:{mime};base64,{base64_image}"
+        last_error = ""
+
+        for model in MODELS:
+            payload = {
+                "model": model,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": PROMPT},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:{mime};base64,{base64_image}"
+                                }
                             }
-                        }
-                    ]
-                }
-            ]
-        }
+                        ]
+                    }
+                ]
+            }
 
-        r = requests.post(
-            "https://openrouter.ai/api/v1/chat/completions",
-            headers=headers,
-            json=payload,
-            timeout=60
-        )
+            r = requests.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers=headers,
+                json=payload,
+                timeout=60
+            )
 
-        if r.status_code != 200:
-            return Response(r.text, status=r.status_code, mimetype="text/plain; charset=utf-8")
+            if r.status_code == 200:
+                result = r.json()["choices"][0]["message"]["content"]
+                return Response(result, mimetype="text/plain; charset=utf-8")
+            else:
+                last_error = r.text
+                continue
 
-        result = r.json()["choices"][0]["message"]["content"]
-        return Response(result, mimetype="text/plain; charset=utf-8")
+        return Response(f"Tum modeller basarisiz oldu. Son hata: {last_error}", status=500, mimetype="text/plain; charset=utf-8")
 
     except Exception as e:
         return Response(f"Hata: {e}", status=500, mimetype="text/plain; charset=utf-8")
