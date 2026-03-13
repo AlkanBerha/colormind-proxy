@@ -34,7 +34,7 @@ def analyze():
         }
 
         payload = {
-            "model": "model": "google/gemma-3-27b-it:free",",
+          "model": "google/gemma-3-27b-it:free",
             "messages": [
                 {
                     "role": "user",
