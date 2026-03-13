@@ -92,8 +92,7 @@ KURALLAR:
 - "Fotoğrafta doğa varsa mevsim ve hava koşullarını analize dahil et.
 - "Fotoğrafta yapı veya şehir varsa mimari baskı ve mekan etkileşimini analize dahil et.
 - "Türkçe yaz."""
-)
- 
+) 
 @app.post("/analyze")
 def analyze():
     try:
