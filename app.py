@@ -34,7 +34,7 @@ def analyze():
         }
 
         payload = {
-            "model": "model": "openrouter/free",",
+            "model": "model": "google/gemma-3-27b-it:free",",
             "messages": [
                 {
                     "role": "user",
