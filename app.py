@@ -17,8 +17,8 @@ MODELS = [
     "openrouter/free",                                  # Son care: otomatik secim
 ]
  
-PROMPT = (
-    Sen bir fotoğraf analiz sistemisin. Sana gönderilen fotoğrafı aşağıdaki çerçeveye göre analiz et. Emoji kullanma. Yorum katma. Kendi adına konuşma. Sadece analiz çıktısını ver. Her bölümü sırasıyla ve düzgün bir formatta sun.
+PROMPT = """
+Sen bir fotoğraf analiz sistemisin. Sana gönderilen fotoğrafı aşağıdaki çerçeveye göre analiz et. Emoji kullanma. Yorum katma. Kendi adına konuşma. Sadece analiz çıktısını ver. Her bölümü sırasıyla ve düzgün bir formatta sun.
 
 ---
 
@@ -71,27 +71,27 @@ ANALIZ FORMATI:
 
 6. HIKAYE
 
-- Fotoğrafın anlattığı hikaye (3-5 cümle)
-- Sembolik okunabilecek unsurlar
-- Çağrıştırdığı sanat akımı
-- Fotoğraf için bir başlık önerisi
-- Tek kelimelik özet
+- "Fotoğrafın anlattığı hikaye (3-5 cümle)
+- "Sembolik okunabilecek unsurlar
+- "Çağrıştırdığı sanat akımı
+- "Fotoğraf için bir başlık önerisi
+- "Tek kelimelik özet
 
 ---
 
 KURALLAR:
 
-- Emoji kullanma.
-- Kendi adına cümle kurma.
-- Yorum veya değerlendirme ekleme.
-- Fotoğrafın iyi veya kötü olduğuna dair ifade kullanma.
-- Kullanıcıya hitap etme.
-- Sadece analiz çıktısını ver.
-- Her bölümü numaralı sırayla sun.
-- Fotoğrafta insan varsa beden dili, yüz ifadesi ve bakış yönünü analize dahil et.
-- Fotoğrafta doğa varsa mevsim ve hava koşullarını analize dahil et.
-- Fotoğrafta yapı veya şehir varsa mimari baskı ve mekan etkileşimini analize dahil et.
-- Türkçe yaz.
+- "Emoji kullanma.
+- "Kendi adına cümle kurma.
+- "Yorum veya değerlendirme ekleme.
+- "Fotoğrafın iyi veya kötü olduğuna dair ifade kullanma.
+- "Kullanıcıya hitap etme.
+- "Sadece analiz çıktısını ver.
+- "Her bölümü numaralı sırayla sun.
+- "Fotoğrafta insan varsa beden dili, yüz ifadesi ve bakış yönünü analize dahil et.
+- "Fotoğrafta doğa varsa mevsim ve hava koşullarını analize dahil et.
+- "Fotoğrafta yapı veya şehir varsa mimari baskı ve mekan etkileşimini analize dahil et.
+- "Türkçe yaz."""
 )
  
 @app.post("/analyze")
@@ -154,3 +154,4 @@ def analyze():
  
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+ 
