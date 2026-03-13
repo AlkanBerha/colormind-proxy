@@ -1,6 +1,3 @@
-
-Copy
-
 from flask import Flask, request, Response
 import base64
 import os
